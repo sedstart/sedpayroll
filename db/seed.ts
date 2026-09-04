@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 config({ path: ".env.local" });
 
-// Static imports of anything touching DATABASE_URL must come after the
+// Static imports of anything touching DB_DATABASE_URL must come after the
 // dotenv config() call above runs, so they are loaded dynamically inside
 // main() below instead of at the top of the module.
 
