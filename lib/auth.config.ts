@@ -18,6 +18,12 @@ export const authConfig = {
   session: {
     strategy: "jwt",
   },
+  // Vercel's serverless/edge runtime doesn't always expose the `VERCEL` env
+  // var to the function process, which is what Auth.js otherwise uses to
+  // auto-trust the host — without this, sign-in fails with `UntrustedHost`.
+  // Trusting the host here (rather than pinning a static AUTH_URL) also
+  // keeps preview deployments, each on their own generated URL, working.
+  trustHost: true,
   providers: [],
   callbacks: {
     // Pure token -> session field mapping, no DB access — shared by both the

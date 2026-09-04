@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SedPayroll
 
-## Getting Started
+A Keka-style payroll, attendance and employee management app built with Next.js
+(App Router), Drizzle ORM, Postgres and Auth.js. One shared portal for
+everyone — admin is just a role flag on an employee's own login that unlocks
+a few extra sections (Employees, Team Attendance, Payroll).
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router, Server Actions, Turbopack)
+- Postgres — Docker locally, [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres) in production
+- Drizzle ORM (`postgres-js` driver)
+- Auth.js v5 (Credentials provider, JWT sessions)
+- Tailwind CSS + shadcn/ui
+- bun
+
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local        # fill in AUTH_SECRET (see below)
+bun install
+bun run docker:up                 # starts local Postgres (docker-compose.yml)
+bun run db:migrate                # applies drizzle/ migrations
+bun run db:seed                   # seeds departments, employees, attendance, payroll
+bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Demo logins (from the seed script):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Admin: `neha.iyer@sedpayroll.com` / `Admin@123` (also `sanya.kapoor@sedpayroll.com`)
+- Employee: `aditi.sharma@sedpayroll.com` / `Employee@123` (see `db/seed.ts` for the full list)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Other useful scripts: `bun run db:generate` (new migration after a schema
+change), `bun run db:studio` (Drizzle Studio), `bun run docker:down`.
 
-## Learn More
+## Environment variables
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Required where | Notes |
+| --- | --- | --- |
+| `DB_DATABASE_URL` | always | Standard Postgres connection string. Local: matches `docker-compose.yml`. Production: your Vercel Postgres connection string. |
+| `AUTH_SECRET` | always | Generate with `bunx auth secret` or `openssl rand -base64 33`. |
+| `AUTH_URL` | optional, local dev only | Not needed on Vercel — `lib/auth.config.ts` sets `trustHost: true`, so Auth.js reads the real host from request headers (works for production and every preview URL). |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploying to Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create a [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres)
+   store and connect it to the project. Copy its connection string into a
+   `DB_DATABASE_URL` project environment variable (Vercel's own `POSTGRES_URL`
+   var is not read directly — map it over).
+2. Set `AUTH_SECRET` as a project environment variable. Do **not** set
+   `AUTH_URL` unless you want to pin a single fixed domain — leaving it unset
+   lets preview deployments authenticate correctly too.
+3. Run migrations and seed against the production database once, e.g. from
+   your machine with `DB_DATABASE_URL` pointed at the Vercel Postgres
+   connection string:
 
-## Deploy on Vercel
+   ```bash
+   DB_DATABASE_URL="<vercel-postgres-url>" bun run db:migrate
+   DB_DATABASE_URL="<vercel-postgres-url>" bun run db:seed   # optional, for demo data
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Deploy. `bun run build` runs as the Vercel build command automatically.
