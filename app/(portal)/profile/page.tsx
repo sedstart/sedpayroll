@@ -58,7 +58,7 @@ export default async function ProfilePage() {
         </p>
       </div>
 
-      <Card>
+      <Card className="from-violet-100/80 dark:from-violet-500/15">
         <CardHeader>
           <CardTitle className="text-base">Details</CardTitle>
         </CardHeader>

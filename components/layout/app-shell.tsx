@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
-import { Wallet2 } from "lucide-react";
+import { Logo } from "@/components/layout/logo";
 import { NavLink } from "@/components/layout/nav-link";
 import { SignOutButton } from "@/components/layout/sign-out-button";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import {
   Avatar,
   AvatarFallback,
@@ -44,9 +45,8 @@ export function AppShell({
         className="hidden h-full w-64 shrink-0 flex-col border-r bg-background md:flex"
         data-testid="sidebar"
       >
-        <div className="flex h-16 shrink-0 items-center gap-2 border-b px-6">
-          <Wallet2 className="size-5 text-primary" aria-hidden="true" />
-          <span className="font-semibold">SedPayroll</span>
+        <div className="flex h-16 shrink-0 items-center border-b px-6">
+          <Logo iconClassName="size-7" />
         </div>
         <nav
           aria-label="Primary navigation"
@@ -85,10 +85,11 @@ export function AppShell({
               <NavLink key={item.href} {...item} />
             ))}
           </nav>
-          <div className="ml-auto flex items-center gap-4">
-            <span className="hidden text-sm text-muted-foreground md:inline">
+          <div className="ml-auto flex items-center gap-2">
+            <span className="hidden text-sm text-muted-foreground md:inline mr-2">
               {userEmail}
             </span>
+            <ThemeToggle />
             <SignOutButton />
           </div>
         </header>

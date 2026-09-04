@@ -75,7 +75,7 @@ export default async function PayslipDetailPage({
         </p>
       </div>
 
-      <Card>
+      <Card className="bg-linear-to-br from-emerald-50 to-card border-emerald-100 dark:from-emerald-500/10 dark:border-emerald-500/20">
         <CardHeader>
           <CardTitle className="text-base">Earnings</CardTitle>
         </CardHeader>
@@ -96,7 +96,7 @@ export default async function PayslipDetailPage({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="bg-linear-to-br from-amber-50 to-card border-amber-100 dark:from-amber-500/10 dark:border-amber-500/20">
         <CardHeader>
           <CardTitle className="text-base">Deductions</CardTitle>
         </CardHeader>
@@ -117,7 +117,7 @@ export default async function PayslipDetailPage({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="bg-linear-to-br from-indigo-50 to-card border-indigo-100 dark:from-indigo-500/10 dark:border-indigo-500/20">
         <CardContent className="flex items-center justify-between py-6">
           <span className="text-lg font-semibold">Net pay</span>
           <span

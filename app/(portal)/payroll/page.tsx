@@ -38,7 +38,7 @@ export default async function PayrollPage() {
         </p>
       </div>
 
-      <Card>
+      <Card className="from-violet-100/80 dark:from-violet-500/15">
         <CardHeader>
           <CardTitle className="text-base">Run payroll</CardTitle>
         </CardHeader>
@@ -77,7 +77,16 @@ export default async function PayrollPage() {
                       {monthLabel(run.month, run.year)}
                     </TableCell>
                     <TableCell>
-                      <Badge variant={run.status === "draft" ? "secondary" : "default"} className="capitalize">
+                      <Badge
+                        variant={
+                          run.status === "paid"
+                            ? "success"
+                            : run.status === "draft"
+                              ? "secondary"
+                              : "default"
+                        }
+                        className="capitalize"
+                      >
                         {run.status}
                       </Badge>
                     </TableCell>

@@ -31,10 +31,12 @@ export function ClockWidget({
   return (
     <div
       data-testid="clock-widget"
-      className="flex flex-col gap-4 rounded-lg border bg-card p-6"
+      className="flex flex-col gap-4 rounded-lg border border-indigo-100 bg-linear-to-br from-indigo-50 to-card p-6 dark:border-indigo-500/20 dark:from-indigo-500/10"
     >
       <div className="flex items-center gap-3">
-        <Clock className="size-6 text-primary" aria-hidden="true" />
+        <span className="flex size-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 dark:bg-indigo-500/15 dark:text-indigo-400">
+          <Clock className="size-5" aria-hidden="true" />
+        </span>
         <div>
           <p className="text-sm text-muted-foreground">Today&apos;s status</p>
           <p

@@ -54,7 +54,10 @@ export default async function DashboardPage() {
           clockOut={todayRecord?.clockOut ?? null}
         />
 
-        <Card data-testid="latest-payslip-card">
+        <Card
+          data-testid="latest-payslip-card"
+          className="bg-linear-to-br from-emerald-50 to-card dark:from-emerald-500/10 dark:to-card border-emerald-100 dark:border-emerald-500/20"
+        >
           <CardHeader>
             <CardTitle className="text-base">Latest payslip</CardTitle>
             <CardDescription>
@@ -121,24 +124,36 @@ async function OrganizationOverview() {
       value: activeCount,
       icon: Users,
       href: "/employees",
+      accent:
+        "from-indigo-50 dark:from-indigo-500/10 border-indigo-100 dark:border-indigo-500/20",
+      iconAccent: "bg-indigo-100 text-indigo-600 dark:bg-indigo-500/15 dark:text-indigo-400",
     },
     {
       label: "Present today",
       value: presentToday,
       icon: CalendarCheck,
       href: "/team-attendance",
+      accent:
+        "from-emerald-50 dark:from-emerald-500/10 border-emerald-100 dark:border-emerald-500/20",
+      iconAccent: "bg-emerald-100 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-400",
     },
     {
       label: "Payroll runs",
       value: recentRuns.length,
       icon: Banknote,
       href: "/payroll",
+      accent:
+        "from-amber-50 dark:from-amber-500/10 border-amber-100 dark:border-amber-500/20",
+      iconAccent: "bg-amber-100 text-amber-600 dark:bg-amber-500/15 dark:text-amber-400",
     },
     {
       label: "Inactive employees",
       value: inactiveCount,
       icon: UserX,
       href: "/employees?status=inactive",
+      accent:
+        "from-violet-50 dark:from-violet-500/10 border-violet-100 dark:border-violet-500/20",
+      iconAccent: "bg-violet-100 text-violet-600 dark:bg-violet-500/15 dark:text-violet-400",
     },
   ];
 
@@ -156,10 +171,16 @@ async function OrganizationOverview() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
           <Link key={stat.label} href={stat.href}>
-            <Card className="transition-colors hover:border-primary/50">
+            <Card
+              className={`bg-linear-to-br to-card transition-colors hover:brightness-95 dark:hover:brightness-110 ${stat.accent}`}
+            >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardDescription>{stat.label}</CardDescription>
-                <stat.icon className="size-4 text-muted-foreground" aria-hidden="true" />
+                <span
+                  className={`flex size-7 items-center justify-center rounded-full ${stat.iconAccent}`}
+                >
+                  <stat.icon className="size-4" aria-hidden="true" />
+                </span>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{stat.value}</div>

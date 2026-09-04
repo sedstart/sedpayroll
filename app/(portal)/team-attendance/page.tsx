@@ -75,7 +75,7 @@ export default async function TeamAttendancePage({
         </form>
       </div>
 
-      <Card>
+      <Card className="from-teal-100/80 dark:from-teal-500/15">
         <CardHeader>
           <CardTitle className="text-base">{date}</CardTitle>
         </CardHeader>
@@ -112,7 +112,7 @@ export default async function TeamAttendancePage({
                         !row.status
                           ? "secondary"
                           : row.status === "present"
-                            ? "default"
+                            ? "success"
                             : "secondary"
                       }
                       className="capitalize"

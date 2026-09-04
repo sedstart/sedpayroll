@@ -71,7 +71,7 @@ export default async function EditEmployeePage({
             {employee.employeeCode} · {employee.email}
           </p>
         </div>
-        <Badge variant={employee.status === "active" ? "default" : "secondary"}>
+        <Badge variant={employee.status === "active" ? "success" : "secondary"}>
           {employee.status}
         </Badge>
       </div>
@@ -92,7 +92,7 @@ export default async function EditEmployeePage({
       ) : null}
 
       {employeeUser ? (
-        <Card>
+        <Card className="from-amber-100/80 dark:from-amber-500/15">
           <CardHeader>
             <CardTitle className="text-base">Admin access</CardTitle>
             <CardDescription>

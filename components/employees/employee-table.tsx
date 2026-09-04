@@ -93,7 +93,7 @@ export function EmployeeTable({
               <TableCell>{employee.designation ?? "—"}</TableCell>
               <TableCell>{formatDate(employee.dateOfJoining)}</TableCell>
               <TableCell>
-                <Badge variant={employee.status === "active" ? "default" : "secondary"}>
+                <Badge variant={employee.status === "active" ? "success" : "secondary"}>
                   {employee.status}
                 </Badge>
               </TableCell>

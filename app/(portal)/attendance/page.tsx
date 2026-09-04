@@ -40,7 +40,7 @@ export default async function MyAttendancePage() {
         </p>
       </div>
 
-      <Card>
+      <Card className="from-sky-100/80 dark:from-sky-500/15">
         <CardHeader>
           <CardTitle className="text-base">History</CardTitle>
         </CardHeader>
@@ -73,7 +73,7 @@ export default async function MyAttendancePage() {
                     </TableCell>
                     <TableCell>
                       <Badge
-                        variant={row.status === "present" ? "default" : "secondary"}
+                        variant={row.status === "present" ? "success" : "secondary"}
                         className="capitalize"
                       >
                         {row.status.replace("_", " ")}

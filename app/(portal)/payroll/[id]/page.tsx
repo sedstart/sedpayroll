@@ -69,7 +69,17 @@ export default async function PayrollRunPage({
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Badge className="capitalize" data-testid="payroll-run-status">
+          <Badge
+            variant={
+              run.status === "paid"
+                ? "success"
+                : run.status === "draft"
+                  ? "secondary"
+                  : "default"
+            }
+            className="capitalize"
+            data-testid="payroll-run-status"
+          >
             {run.status}
           </Badge>
           {run.status === "processed" ? (

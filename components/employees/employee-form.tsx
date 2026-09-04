@@ -90,7 +90,7 @@ export function EmployeeForm({
         </div>
       ) : null}
 
-      <Card>
+      <Card className="from-indigo-100/80 dark:from-indigo-500/15">
         <CardHeader>
           <CardTitle className="text-base">Personal details</CardTitle>
         </CardHeader>
@@ -236,7 +236,7 @@ export function EmployeeForm({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="from-amber-100/80 dark:from-amber-500/15">
         <CardHeader>
           <CardTitle className="text-base">Bank details</CardTitle>
         </CardHeader>
@@ -276,7 +276,7 @@ export function EmployeeForm({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="from-emerald-100/80 dark:from-emerald-500/15">
         <CardHeader>
           <CardTitle className="text-base">
             Monthly salary structure
